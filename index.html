@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fukuyama Keiske</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+</head>
+<body>
+    <div class="gradient-bg">
+        <svg 
+            viewBox="0 0 100vw 100vw"
+            xmlns='http://www.w3.org/2000/svg'
+            class="noiseBg"
+        >
+            <filter id='noiseFilterBg'>
+                <feTurbulence 
+                    type='fractalNoise'
+                    baseFrequency='0.6'
+                    stitchTiles='stitch' />
+            </filter>
+            <rect
+                width='100%'
+                height='100%'
+                preserveAspectRatio="xMidYMid meet"
+                filter='url(#noiseFilterBg)' />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="interactive"></div>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>Привет, я Фукуяма Кейске</h1>
+    </div>
+    <nav>
+        <div class="logo">Keiske</div>
+        <ul>
+            <li><a href="#about">Информация</a></li>
+            <li><a href="#stack">Технологии</a></li>
+            <li><a href="#projects">Проекты</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <div class="scroll-down">
+        <span>&#x25BC;</span>
+    </div>
+
+    <main>
+        <br>
+
+        <section id="about">
+            <h2>Информация</h2>
+            <p>Меня зовут Кейске. Я Fullstack разработчик, соответственно могу написать код практически для всего, начиная от обычного скрипта и заканчивая нейросетью. В данный момент я делаю упор на разработку приложений для мобильных устройств. Тем не менее за спиной огромное количество backend и frontend разработок. Даже этот сайт создан, как демонстрация моих навыков в web-программировании. При сложной задаче я обязательно найду способ для её решения, ведь я люблю подчерпывать новые знания.</p>
+        </section>
+
+        <br>
+        <br>
+        <br>
+
+        <section id="stack">
+            <h2>Технологии</h2>
+            <div class="languages-container">
+                <div class="sheet">
+                    <img src="assets/languages/python-logo.png" alt="Python Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/java-logo.png" alt="Java Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/kotlin-logo.png" alt="Kotlin Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/js-logo.png" alt="JavaScript Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/ts-logo.png" alt="TypeScript Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/cpp-logo.png" alt="C++ Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/csharp-logo.png" alt="C# Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/bash-logo.png" alt="Bash Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/go-logo.png" alt="Go Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/docker-logo.png" alt="Docker Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/mongodb-logo.png" alt="MongoDB Logo">
+                    <div class="shimmer"></div>
+                </div>
+                <div class="sheet">
+                    <img src="assets/languages/postgresql-logo.png" alt="PostgreSQL Logo">
+                    <div class="shimmer"></div>
+                </div>
+            </div>
+        </section>
+
+        <br>
+        <br>
+        <br>
+
+        <section id="projects">
+            <h2>Мои проекты</h2>
+            <div id="app" class="container">
+                <card data-image="assets/projects/captcha_solver.jpg">
+                    <h1 slot="header">Captcha solver</h1>
+                    <p slot="content">Нейросеть для решения image капчи.</p>
+                </card>
+            </div>
+        </section>
+
+        <br>
+        <br>
+        <br>
+
+        <section id="contact">
+            <h2>Контакты</h2>
+            <div id="icons-container">
+                <div class="logo-container" id="telegram-logo"></div>
+                <div class="logo-container" id="gmail-logo"></div>
+                <div class="logo-container" id="yandex-logo"></div>
+                <div class="logo-container" id="discord-logo"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Fukuyama Keiske. Все права защищены.</p>
+    </footer>
+
+    <script src="scripts/index.js"></script>
+</body>
+</html>
