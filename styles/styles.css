@@ -795,7 +795,7 @@ nav:after {
   position: relative;
 }
 
-.logo-container { width: 200px; height: 200px; position: relative; }
+.logo-container { width: 150; height: 150; position: relative; }
 
 canvas {
   display: block;
