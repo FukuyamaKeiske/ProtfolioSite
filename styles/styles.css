@@ -326,6 +326,16 @@ nav ul li a:hover {
     nav .logo {
         font-size: 1.2rem;
     }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    nav ul li {
+        display: block;
+    }
 }
 
 .hero {
@@ -338,7 +348,7 @@ nav ul li a:hover {
 }
 
 .hero h1 {
-    font-size: clamp(5rem, 5cqi, 5rem);
+    font-size: clamp(2rem, 5cqi, 5rem);
     font-weight: 100;
     max-width: 100%;
     color: #ffffff;
@@ -438,7 +448,7 @@ nav:after {
 
 /* Стили для карточек проектов */
 .container {
-    padding: 40px 80px;
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
