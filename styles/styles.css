@@ -582,7 +582,7 @@ nav:after {
 }
 
 /* Дополнительные стили для адаптивности */
-@media (max-width: 768px) {
+@media (max-width: 400px) {
     .card-wrap {
         flex: 0 0 100%;
         width: 100%;
