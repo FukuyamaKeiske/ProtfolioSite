@@ -184,9 +184,10 @@ logos.forEach(logo => {
       // Поворот текстуры на 90 градусов вправо
       texture.center.set(0.5, 0.5);
       texture.rotation = Math.PI / 2;
+      texture.background = logo.color;
 
       // Создание материалов для цилиндра
-      const topBottomMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+      const topBottomMaterial = new THREE.MeshBasicMaterial({ map: texture});
       const sideMaterial = new THREE.MeshBasicMaterial({ color: logo.color }); // Цвет боковой поверхности
 
       // Создание геометрии цилиндра с уменьшенной высотой
@@ -198,6 +199,11 @@ logos.forEach(logo => {
 
       // Создание меша с разными материалами для верхней, нижней и боковой поверхности
       const materials = [sideMaterial, topBottomMaterial, topBottomMaterial];
+
+      geometry.groups[0].materialIndex = 0; // Боковые грани
+      geometry.groups[1].materialIndex = 1; // Верхняя грань
+      geometry.groups[2].materialIndex = 2; // Нижняя грань// Верхняя грань
+
       const logoMesh = new THREE.Mesh(geometry, materials);
       scene.add(logoMesh);
 
@@ -265,6 +271,65 @@ logos.forEach(logo => {
       animate();
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const logos = document.querySelectorAll('.lang-logo');
+
+    logos.forEach(logo => {
+        const img = logo.querySelector('img');
+        fetch(img.src)
+            .then(response => response.text())
+            .then(svgText => {
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+                const svgElement = svgDoc.querySelector('svg');
+
+                if (svgElement) {
+                    // Создаем контейнер для shimmer
+                    const shimmerContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                    shimmerContainer.classList.add('shimmer');
+                    shimmerContainer.style.opacity = '0';
+
+                    // Клонируем все элементы, которые могут быть частью SVG
+                    const elements = svgElement.querySelectorAll('path, rect, circle, ellipse, polygon, line, polyline');
+                    elements.forEach(element => {
+                        const shimmerElement = element.cloneNode();
+                        shimmerElement.classList.add('shimmer-path');
+                        shimmerContainer.appendChild(shimmerElement);
+                    });
+
+                    // Добавляем shimmer контейнер в SVG
+                    svgElement.appendChild(shimmerContainer);
+
+                    // Вставляем SVG в контейнер
+                    logo.innerHTML = '';
+                    logo.appendChild(svgElement);
+
+                    // Добавляем обработчики событий для управления анимацией
+                    logo.addEventListener('mouseenter', () => {
+                        shimmerContainer.style.opacity = '1';
+                        shimmerContainer.querySelectorAll('.shimmer-element').forEach(element => {
+                            element.style.animationPlayState = 'running';
+                            element.style.opacity = '1';
+                        });
+                    });
+
+                    logo.addEventListener('mouseleave', () => {
+                        shimmerContainer.style.opacity = '0';
+                        shimmerContainer.querySelectorAll('.shimmer-element').forEach(element => {
+                            element.style.animationPlayState = 'paused';
+                            element.style.opacity = '0';
+                        });
+                    });
+                }
+            });
+    });
+});
+
+
+
+
 
 const app = new Vue({
   el: '#app'
